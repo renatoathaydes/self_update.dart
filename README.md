@@ -1,0 +1,1 @@
+Self-compiling Dart native application example.
