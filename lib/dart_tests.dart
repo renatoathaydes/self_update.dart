@@ -8,7 +8,7 @@ Future<File> compileItself() async {
   await exec(
       'dart', ['compile', 'exe', 'bin/dart_tests.dart', '-o', tempFile.path]);
 
-  if (Platform.isLinux) {
+  if (Platform.isLinux && await myexecFile.exists()) {
     // required on linux
     await myexecFile.delete();
   }
