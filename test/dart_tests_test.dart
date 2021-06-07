@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
 import 'package:self_compile/dart_tests.dart';
 import 'package:test/test.dart';
 
@@ -24,7 +25,8 @@ void main() {
           proc.stdout,
           equals('self-updating...\n'
               'Info: Compiling with sound null safety\n'
-              'Generated: ${executable!.path}\n'
+              'Generated: ${p.dirname(executable!.path)}'
+              '${p.separator}~${ p.basename(executable!.path)}\n'
               'Hello Dart!\n'),
           reason: 'stderr: ${proc.stderr}');
     });

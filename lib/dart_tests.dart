@@ -4,12 +4,16 @@ final myexecFile = File('myexec').absolute;
 
 Future<File> compileItself() async {
   print('self-updating...');
+  final tempFile = File('~myexec');
+  await exec(
+      'dart', ['compile', 'exe', 'bin/dart_tests.dart', '-o', tempFile.path]);
+
   if (Platform.isLinux) {
     // required on linux
     await myexecFile.delete();
   }
-  await exec(
-      'dart', ['compile', 'exe', 'bin/dart_tests.dart', '-o', myexecFile.path]);
+
+  await tempFile.rename(myexecFile.path);
   return myexecFile;
 }
 
